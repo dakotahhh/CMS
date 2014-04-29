@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.stereotype.Service;
 
 @Service("helloWorldService")
-public class HelloWorldServiceImpl implements HelloWorldService, ImageService, VideoService {
+public class HelloWorldServiceImpl implements ImageService, VideoService {
 	public String sayHello(String name) {
 		return "Howdy, " + name + "!";
 	}
