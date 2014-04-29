@@ -8,32 +8,76 @@ import javax.ws.rs.core.Response;
 import org.springframework.stereotype.Service;
 
 @Service("helloWorldService")
-public class HelloWorldServiceImpl implements HelloWorldService {
-	private Map<Long, Greeting> greetings = new HashMap<Long, Greeting>();
+public class HelloWorldServiceImpl implements HelloWorldService, ImageService, VideoService {
+	public String sayHello(String name) {
+		return "Howdy, " + name + "!";
+	}
+	
+	private Map<Long, Image> images = new HashMap<Long, Image>();
+	private Map<Long, Video> videos = new HashMap<Long, Video>();
 	private Long sequenceId = 1L;
 	
-	public Response getGreeting(Long id) {
-		Greeting g = greetings.get(id);
-		if ( g == null ) {
+	public Response getImage(Long id)
+	{
+		Image i = images.get(id);
+		if(i == null)
+		{
 			return Response.status(404).build();
-		} else {
-			return Response.ok(g).build();
+		}
+		else
+		{
+			return Response.ok(i).build();
 		}
 	}
-
-	public Response updateGreeting(Long id, Greeting greeting) {
-		Greeting g = greetings.put(id, greeting);
-		return Response.ok(g).build();
+	
+	public Response getVideo(Long id)
+	{
+		Video v = videos.get(id);
+		if(v == null)
+		{
+			return Response.status(404).build();
+		}
+		else
+		{
+			return Response.ok(v).build();
+		}
 	}
-
-	public Response createGreeting(Greeting greeting) {
-		greeting.setId(sequenceId++);
-		greetings.put(greeting.getId(), greeting);
-		return Response.status(201).entity(greeting).build();
+	
+	public Response updateImage(Long id, Image image)
+	{
+		Image i = images.put(id, image);
+		return Response.ok(i).build();
 	}
-
-	public Response deleteGreeting(Long id) {
-		greetings.remove(id);
+	
+	public Response updateVideo(Long id, Video video)
+	{
+		Video v = videos.put(id,  video);
+		return Response.ok(v).build();
+	}
+	
+	public Response createImage(Image image)
+	{
+		image.setId(sequenceId++);
+		images.put(image.getId(), image);
+		return Response.status(201).entity(image).build();
+	}
+	
+	public Response createVideo(Video video)
+	{
+		video.setId(sequenceId++);
+		videos.put(video.getId(), video);
+		return Response.status(201).entity(video).build();
+	}
+	
+	public Response deleteImage(Long id)
+	{
+		images.remove(id);
+		return Response.status(204).build();
+	}
+	
+	public Response deleteVideo(Long id)
+	{
+		videos.remove(id);
 		return Response.status(204).build();
 	}
 }
