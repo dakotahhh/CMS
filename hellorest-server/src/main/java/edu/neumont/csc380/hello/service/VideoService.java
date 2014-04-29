@@ -21,12 +21,14 @@ public interface VideoService {
 	
 	@PUT
 	@Path("/{id}")
-	@Consumes({"video/quicktime", "video/avi", "video/mp4"})
+	@Consumes({"multipart/mixed"})
+//	@Consumes({"video/quicktime", "video/avi", "video/mp4"})
 	@Produces("application/json")
 	Response updateVideo(@PathParam("id") Long id, Video video);
 	
 	@POST
-	@Consumes({"video/quicktime", "video/avi", "video/mp4"})
+	@Consumes({"multipart/mixed"})
+//	@Consumes({"video/quicktime", "video/avi", "video/mp4"})
 	@Produces("application/json")
 	Response createVideo(Video video);
 	
