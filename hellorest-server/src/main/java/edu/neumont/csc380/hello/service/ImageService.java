@@ -21,12 +21,14 @@ public interface ImageService {
 	
 	@PUT
 	@Path("/{id}")
-	@Consumes({"image/jpg", "image/png"})
+	@Consumes({"multipart/mixed"})
+//	@Consumes({"image/jpg", "image/png"})
 	@Produces("application/json")
 	Response updateImage(@PathParam("id") Long id, Image image);
 	
 	@POST
-	@Consumes({"image/jpg", "image/png"})
+	@Consumes({"multipart/mixed"})
+//	@Consumes({"image/jpg", "image/png"})
 	@Produces("application/json")
 	Response createImage(Image image);
 	
