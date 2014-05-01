@@ -1,5 +1,7 @@
 package edu.neumont.csc380.hello.service;
 
+import java.io.File;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -10,27 +12,27 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+
 
 @Path("/image")
 public interface ImageService {
 
 	@GET
 	@Path("/{id")
-	@Produces({"image/jpg", "image/png"})
+	@Produces("multipart/mixed")
 	Response getImage(@PathParam("id") Long id);
 	
 	@PUT
 	@Path("/{id}")
-	@Consumes({"multipart/mixed"})
-//	@Consumes({"image/jpg", "image/png"})
+	@Consumes("multipart/mixed")
 	@Produces("application/json")
-	Response updateImage(@PathParam("id") Long id, Image image);
+	Response updateImage(@PathParam("id") Long id, @Multipart(value = "imageData") Image imageData, @Multipart(value = "imageFile") File imageFile);
 	
 	@POST
-	@Consumes({"multipart/mixed"})
-//	@Consumes({"image/jpg", "image/png"})
+	@Consumes("multipart/mixed")
 	@Produces("application/json")
-	Response createImage(Image image);
+	Response createImage(@Multipart(value = "imageData") Image imageData, @Multipart(value = "imageFile") File imageFile);
 	
 	@DELETE
 	@Path("/{id}")

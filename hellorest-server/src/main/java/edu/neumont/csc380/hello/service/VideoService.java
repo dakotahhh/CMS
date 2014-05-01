@@ -1,5 +1,7 @@
 package edu.neumont.csc380.hello.service;
 
+import java.io.File;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -10,27 +12,28 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
+
 
 @Path("/video")
 public interface VideoService {
 
 	@GET
 	@Path("/{id}")
-	@Produces({"video/quicktime", "video/avi", "video/mp4"})
+	@Produces("multipart/mixed")
 	Response getVideo(@PathParam("id") Long id);
 	
 	@PUT
 	@Path("/{id}")
-	@Consumes({"multipart/mixed"})
-//	@Consumes({"video/quicktime", "video/avi", "video/mp4"})
+	@Consumes("multipart/mixed")
 	@Produces("application/json")
-	Response updateVideo(@PathParam("id") Long id, Video video);
+	Response updateVideo(@PathParam("id") Long id, @Multipart(value = "videoData") Video videoData, @Multipart(value = "videoFile") File videoFile);
 	
 	@POST
-	@Consumes({"multipart/mixed"})
-//	@Consumes({"video/quicktime", "video/avi", "video/mp4"})
+	@Consumes("multipart/mixed")
 	@Produces("application/json")
-	Response createVideo(Video video);
+	Response createVideo(@Multipart(value = "videoData") Video videoData, @Multipart(value = "videoFile") File videoFile);
 	
 	@DELETE
 	@Path("/{id}")
