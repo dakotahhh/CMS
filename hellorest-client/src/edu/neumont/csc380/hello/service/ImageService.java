@@ -1,8 +1,9 @@
 package edu.neumont.csc380.hello.service;
 
+import java.io.File;
+
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import java.io.File;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 
+import edu.neumont.csc380.hello.service.Image;
 
 @Path("/image")
 @PermitAll
@@ -42,4 +44,5 @@ public interface ImageService {
 	@RolesAllowed("ImageOwner")
 	Response deleteImage(@PathParam("id") Long id);
 
+}
 }
