@@ -1,7 +1,12 @@
 package edu.neumont.csc380.hello.service;
 
+<<<<<<< HEAD
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+=======
+import java.io.File;
+
+>>>>>>> 6426a5f3f3d828697b58b88e97aa5dbbc9eab824
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,22 +26,25 @@ public interface ImageService {
 
 	@GET
 	@Path("/{id")
-	@Produces({"image/jpg", "image/png"})
+	@Produces("multipart/mixed")
 	Response getImage(@PathParam("id") Long id);
 	
 	@PUT
 	@Path("/{id}")
+<<<<<<< HEAD
 	@RolesAllowed("ImageOwner")
 	@Consumes({"multipart/mixed"})
 //	@Consumes({"image/jpg", "image/png"})
+=======
+	@Consumes("multipart/mixed")
+>>>>>>> 6426a5f3f3d828697b58b88e97aa5dbbc9eab824
 	@Produces("application/json")
-	Response updateImage(@PathParam("id") Long id, Image image);
+	Response updateImage(@PathParam("id") Long id, @Multipart(value = "imageData") Image imageData, @Multipart(value = "imageFile") File imageFile);
 	
 	@POST
-	@Consumes({"multipart/mixed"})
-//	@Consumes({"image/jpg", "image/png"})
+	@Consumes("multipart/mixed")
 	@Produces("application/json")
-	Response createImage(Image image);
+	Response createImage(@Multipart(value = "imageData") Image imageData, @Multipart(value = "imageFile") File imageFile);
 	
 	@DELETE
 	@Path("/{id}")
