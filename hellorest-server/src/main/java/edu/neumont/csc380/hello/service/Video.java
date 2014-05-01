@@ -29,15 +29,5 @@ public class Video {
 	{
 		this.fileName = fileName;
 	}
-	
-	public int fileSize()
-	{
-		return fileSize;
-	}
-	
-	public void setfileSize(int fileSize)
-	{
-		this.fileSize = fileSize;
-	}
 
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.ws.rs.core.Response;
 
+import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import org.springframework.stereotype.Service;
 
 @Service("helloWorldService")
@@ -43,18 +44,21 @@ public class HelloWorldServiceImpl implements ImageService, VideoService {
 		}
 	}
 	
+	//needs to be owner of image
 	public Response updateImage(Long id, Image image)
 	{
 		Image i = images.put(id, image);
 		return Response.ok(i).build();
 	}
 	
+	//needs to be owner of image
 	public Response updateVideo(Long id, Video video)
 	{
 		Video v = videos.put(id,  video);
 		return Response.ok(v).build();
 	}
 	
+	//needs to be owner of image
 	public Response createImage(Image image)
 	{
 		image.setId(sequenceId++);
@@ -62,6 +66,7 @@ public class HelloWorldServiceImpl implements ImageService, VideoService {
 		return Response.status(201).entity(image).build();
 	}
 	
+	//needs to be owner of image
 	public Response createVideo(Video video)
 	{
 		video.setId(sequenceId++);
@@ -69,12 +74,14 @@ public class HelloWorldServiceImpl implements ImageService, VideoService {
 		return Response.status(201).entity(video).build();
 	}
 	
+	//needs to be owner of image
 	public Response deleteImage(Long id)
 	{
 		images.remove(id);
 		return Response.status(204).build();
 	}
 	
+	//needs to be owner of image
 	public Response deleteVideo(Long id)
 	{
 		videos.remove(id);

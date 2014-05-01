@@ -51,15 +51,5 @@ public class Image {
 	{
 		this.height = height;
 	}
-	
-	public int getfileSize()
-	{
-		return fileSize;
-	}
-	
-	public void setfileSize(int fileSize)
-	{
-		this.fileSize = fileSize;
-	}
 
 }
