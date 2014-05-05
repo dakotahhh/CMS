@@ -17,6 +17,7 @@ import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 
 
 @Path("/image")
+@Produces("application/vnd.neumont.edu.media-v1+json")
 @PermitAll
 public interface ImageService {
 
@@ -29,12 +30,10 @@ public interface ImageService {
 	@Path("/{id}")
 	@RolesAllowed("ImageOwner")
 	@Consumes({"multipart/mixed"})
-	@Produces("application/json")
 	Response updateImage(@PathParam("id") Long id, @Multipart(value = "imageData") Image imageData, @Multipart(value = "imageFile") File imageFile);
 	
 	@POST
 	@Consumes("multipart/mixed")
-	@Produces("application/json")
 	Response createImage(@Multipart(value = "imageData") Image imageData, @Multipart(value = "imageFile") File imageFile);
 	
 	@DELETE
