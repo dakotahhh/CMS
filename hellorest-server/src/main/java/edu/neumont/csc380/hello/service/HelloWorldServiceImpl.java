@@ -47,7 +47,6 @@ public class HelloWorldServiceImpl implements ImageService, VideoService {
 		return Response.ok(i).build();
 	}
 	
-
 	public Response updateVideo(Long id, @Multipart(value = "videoData") Video videoData, @Multipart(value = "videoFile") File videoFile)
 	{
 		Video v = videos.put(id,  videoData);
