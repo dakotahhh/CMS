@@ -1,6 +1,6 @@
 package edu.neumont.csc380.hello.service;
 
-public class VideoNotFoundException extends Exception{
+public class VideoNotFoundException extends RuntimeException{
 
 	public VideoNotFoundException()
 	{
